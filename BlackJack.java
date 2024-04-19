@@ -1,0 +1,174 @@
+import java.util.Scanner;
+
+/**
+ * BlackJack
+*/
+public class BlackJack {
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        
+        //Introduction
+        System.out.println("Welcome to Java Casino");
+        System.out.println("Do you have a knack for Black Jack?");
+        System.out.println("We shall see...");
+        System.out.println("...Ready? Press anything to begin!");
+        scan.nextLine();
+
+        
+        // user cards
+        System.out.println("You get a");
+        int userNumber1= randomNumber();
+        int userNumber2= randomNumber();
+        String userCard1= drawRandomCard(userNumber1);
+        String userCard2= drawRandomCard(userNumber2);
+        System.out.println(userCard1);
+        System.out.println("and a");
+        System.out.println(userCard2);
+        System.out.println("your total is " + (userNumber1+userNumber2 + "\n")) ;
+
+        //computer cards
+        int computerNumber1 = randomNumber();
+        String computerCard1= drawRandomCard(computerNumber1);
+        System.out.println("The dealer shows");
+        System.out.println(computerCard1);
+        System.out.println("and has a card facing down");
+        System.out.println(faceDown());
+
+
+
+        scan.close();
+        
+        }
+
+
+    public static String faceDown(){
+        return 
+        "   _____\n" +
+        "  |     |\n"+ 
+        "  |  J  |\n"+ 
+        "  | JJJ |\n"+ 
+        "  |  J  |\n"+ 
+        "  |_____|\n";
+
+    }
+
+    public static int randomNumber(){
+        int randomNumber = (int)(Math.random()*13+1);
+        return randomNumber;
+    }
+
+
+    public static String drawRandomCard(int cardNumber){
+        switch(cardNumber){
+            case 1:
+            return  
+            "   _____\n"+
+            "  |A _  |\n"+ 
+            "  | ( ) |\n"+
+            "  |(_'_)|\n"+
+            "  |  |  |\n"+
+            "  |____V|\n";
+        case 2:
+            return  
+            "   _____\n"+              
+            "  |2    |\n"+ 
+            "  |  o  |\n"+
+            "  |     |\n"+
+            "  |  o  |\n"+
+            "  |____Z|\n";
+        case 3:
+            return  
+            "   _____\n" +
+            "  |3    |\n"+
+            "  | o o |\n"+
+            "  |     |\n"+
+            "  |  o  |\n"+
+            "  |____E|\n";
+        case 4:
+            return  
+            "   _____\n" +
+            "  |4    |\n"+
+            "  | o o |\n"+
+            "  |     |\n"+
+            "  | o o |\n"+
+            "  |____h|\n";
+        case 5:
+            return  
+            "   _____ \n" +
+            "  |5    |\n" +
+            "  | o o |\n" +
+            "  |  o  |\n" +
+            "  | o o |\n" +
+            "  |____S|\n";
+        case 6:
+            return  
+            "   _____ \n" +
+            "  |6    |\n" +
+            "  | o o |\n" +
+            "  | o o |\n" +
+            "  | o o |\n" +
+            "  |____6|\n";
+        case 7:
+            return  
+            "   _____ \n" +
+            "  |7    |\n" +
+            "  | o o |\n" +
+            "  |o o o|\n" +
+            "  | o o |\n" +
+            "  |____7|\n";
+        case 8:
+            return  
+            "   _____ \n" +
+            "  |8    |\n" +
+            "  |o o o|\n" +
+            "  | o o |\n" +
+            "  |o o o|\n" +
+            "  |____8|\n";
+        case 9:
+            return  
+            "   _____ \n" +
+            "  |9    |\n" +
+            "  |o o o|\n" +
+            "  |o o o|\n" +
+            "  |o o o|\n" +
+            "  |____9|\n";
+        case 10:
+            return  
+            "   _____ \n" +
+            "  |10  o|\n" +
+            "  |o o o|\n" +
+            "  |o o o|\n" +
+            "  |o o o|\n" +
+            "  |___10|\n";
+        case 11:
+            return  
+            "   _____\n" +
+            "  |J  ww|\n"+ 
+            "  | o {)|\n"+ 
+            "  |o o% |\n"+ 
+            "  | | % |\n"+ 
+            "  |__%%[|\n";
+        case 12:
+            return  
+            "   _____\n" +
+            "  |Q  ww|\n"+ 
+            "  | o {(|\n"+ 
+            "  |o o%%|\n"+ 
+            "  | |%%%|\n"+ 
+            "  |_%%%O|\n";
+        case 13:
+            return  
+            "   _____\n" +
+            "  |K  WW|\n"+ 
+            "  | o {)|\n"+ 
+            "  |o o%%|\n"+ 
+            "  | |%%%|\n"+ 
+            "  |_%%%>|\n";
+                  
+        default: return "Error: card not found";
+            
+        }
+    }
+
+}
