@@ -4,10 +4,10 @@ import java.util.Scanner;
  * BlackJack
 */
 public class BlackJack {
+
+    public static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) {
 
-        Scanner scan = new Scanner(System.in);
-        
         //Introduction
         System.out.println("Welcome to Java Casino");
         System.out.println("Do you have a knack for Black Jack?");
@@ -20,24 +20,87 @@ public class BlackJack {
         System.out.println("You get a");
         int userNumber1= randomNumber();
         int userNumber2= randomNumber();
+        int userTotal = (Math.min(userNumber1, 10)) + (Math.min(userNumber2,10));
         String userCard1= drawRandomCard(userNumber1);
         String userCard2= drawRandomCard(userNumber2);
         System.out.println(userCard1);
         System.out.println("and a");
         System.out.println(userCard2);
-        System.out.println("your total is " + (userNumber1+userNumber2 + "\n")) ;
+        System.out.println("your total is " + userTotal + "\n");
 
-        //computer cards
-        int computerNumber1 = randomNumber();
-        String computerCard1= drawRandomCard(computerNumber1);
+        //dealer cards
+        int dealerNumber1 = randomNumber();
+        int dealerNumber2 = randomNumber();
+        String dealerCard1= drawRandomCard(dealerNumber1);
+        String dealerCard2= drawRandomCard(dealerNumber2);
         System.out.println("The dealer shows");
-        System.out.println(computerCard1);
+        System.out.println(dealerCard1);
         System.out.println("and has a card facing down");
         System.out.println(faceDown());
+        System.out.println("The dealer's total is hidden");
 
+        //user turn: hit or stay
+        while(true){
+            String option= hitOrStay();
 
+            if(option.equals("stay")){
+                break;
+            }
+            //draw a new card
+            int newNumber = randomNumber();
+            String newCard = drawRandomCard(newNumber);
+            userTotal+= Math.min(newNumber, 10);
+            //print new card drawn
+            System.out.println("You get a");
+            System.out.println(newCard);
+            //print total
+            System.out.println("your total is " + userTotal +"\n");
+            //condition if user loses 
+            if(userTotal>21){
+                System.out.println("Bust! Player loses");
+                System.exit(0);
+            }
+        
+            
+        }
+
+        //computer turn
+        System.out.println("\nDealer's turn\n");
+        System.out.println("The dealer's cards are");
+        System.out.println(dealerCard1);
+        System.out.println("and a");
+        System.out.println(dealerCard2);
+        int dealerTotal = (Math.min(dealerNumber1,10))+(Math.min(dealerNumber2,10));
+
+        System.out.println("Dealer's total is " + dealerTotal);
+
+        while(dealerTotal < 17){
+            int dealerNewNumber = randomNumber();
+            String dealerNewCard = drawRandomCard(dealerNewNumber);
+            dealerTotal+= Math.min(dealerNewNumber,10);
+
+            System.out.println("\nDealer gets a");
+            System.out.println(dealerNewCard);
+            System.out.println("Dealer's total is " + dealerTotal + "\n");
+        }
+
+        if(dealerTotal > 21){
+            System.out.println("Bust! Dealer loses");
+            System.exit(0);
+        }
+
+        if(userTotal > dealerTotal){
+            System.out.println("User wins!");
+        }else if(userTotal<dealerTotal){
+            System.out.println("Dealer wins!");
+            
+        }else{
+            System.out.println("It's a tie!");
+
+        }  
 
         scan.close();
+
         
         }
 
@@ -57,7 +120,6 @@ public class BlackJack {
         int randomNumber = (int)(Math.random()*13+1);
         return randomNumber;
     }
-
 
     public static String drawRandomCard(int cardNumber){
         switch(cardNumber){
@@ -170,5 +232,19 @@ public class BlackJack {
             
         }
     }
+
+    public static String hitOrStay(){
+
+        System.out.println("Would you like to 'hit or 'stay'?");
+        String response= scan.nextLine();
+
+        while(!(response.equalsIgnoreCase("hit" )|| response.equalsIgnoreCase("stay"))){
+            System.out.println("Please write 'hit' or 'stay'");
+            response = scan.nextLine();
+        }
+        return response;
+
+    }
+
 
 }
